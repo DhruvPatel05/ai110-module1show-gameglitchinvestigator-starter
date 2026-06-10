@@ -12,6 +12,8 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 Document at least 3 bugs you found. Add rows as needed.
 
+When I first ran the game, the number guessing feature did not work correctly. The hint system sometimes provided contradictory information, making it impossible to logically determine the correct answer. I also found an issue with the attempt counter where the game ended before the final attempt could be used. In some cases, even when the only possible answer remained, the game still marked the guess as incorrect.
+
 | Input      | Expected Behavior | Actual Behavior | Console Output / Error |
 |-------     |-------------------|-----------------|------------------------|
 | Guess = 44 | Game should correctly indicate if the guess is too high or too low | Hint system sometimes gave inconsistent feedback | No console error |
