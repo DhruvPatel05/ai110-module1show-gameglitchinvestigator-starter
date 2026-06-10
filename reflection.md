@@ -12,11 +12,11 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 Document at least 3 bugs you found. Add rows as needed.
 
-| Input | Expected Behavior | Actual Behavior | Console Output / Error |
-|-------|-------------------|-----------------|------------------------|
-| | | | |
-| | | | |
-| | | | |
+| Input      | Expected Behavior | Actual Behavior | Console Output / Error |
+|-------     |-------------------|-----------------|------------------------|
+| Guess = 44 | Game should correctly indicate if the guess is too high or too low | Hint system sometimes gave inconsistent feedback | No console error |
+| One attempt remaining | Player should be allowed to use the final attempt | Game displayed that all attempts were used before the final guess | No console error |
+| Guesses: 44 → higher, 50 → lower, 48 → higher, then 49 | Since 49 was the only possible answer left, the player should win | Game marked the answer as incorrect and the player lost | No console error |
 
 ---
 
