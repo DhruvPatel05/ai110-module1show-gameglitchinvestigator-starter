@@ -80,13 +80,28 @@ The AI suggested the methodology of "one test per bug scenario with simple asser
 
 ## 4. What did you learn about Streamlit and state?
 
-- How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+**Explaining Streamlit Reruns and Session State to a Friend:**
+
+Imagine a light switch in your house that doesn't remember what state it was in. Every time you flip it, the whole house recalculates whether it should be on or off from scratch. That's how Streamlit works—every time a user interacts with the app (clicks a button, types in a box), **Streamlit reruns the entire script from top to bottom**. This is why the secret number kept changing: the line `st.session_state.secret = random.randint(low, high)` was being re-executed on every rerun, generating a new number each time!
+
+**Session state** is the "memory" that fixes this. It's like writing the switch position on a sticky note that persists across reruns. When you do `st.session_state.secret = random.randint(low, high)` inside an `if "secret" not in st.session_state:` block, you're saying "only generate this once, then remember it forever." Without this protection, state variables reset on every interaction.
+
+**Why the bug happened:** The original code didn't protect the secret number properly, and compounded the issue by converting it to a string on even attempts—so the comparison logic was broken even when the secret was correct. I learned that **Streamlit state management is critical, and type consistency matters even more in a reactive framework where variables are re-evaluated constantly.**
 
 ---
 
 ## 5. Looking ahead: your developer habits
 
-- What is one habit or strategy from this project that you want to reuse in future labs or projects?
-  - This could be a testing habit, a prompting strategy, or a way you used Git.
-- What is one thing you would do differently next time you work with AI on a coding task?
-- In one or two sentences, describe how this project changed the way you think about AI generated code.
+**One habit I want to reuse: "One Test Per Bug"**
+
+Instead of writing a complex test suite that tries to test everything at once, I adopted the strategy of writing one focused test per specific bug. Each test has one scenario, one assertion, and a clear docstring explaining what bug it addresses. This made debugging faster because when a test failed, I knew exactly which bug was still broken. I'll use this methodology in all future projects—it's more maintainable and serves as living documentation of what each bug was.
+
+**One thing I'd do differently: Validate AI tool suggestions before using them**
+
+The AI suggested using `configure_python_environment` to set up the Python environment, but this tool required interactive user input (selecting/creating an environment) that was unnecessary overhead. I wasted time setting it up before realizing a simpler approach (`install_python_packages` directly) was better. Next time, I'll ask clarifying questions like "Does this tool require user interaction?" or "Is there a simpler way?" before committing to an AI suggestion. Just because AI suggests a tool doesn't mean it's the best tool for this specific context.
+
+**How this project changed my thinking about AI-generated code:**
+
+This project taught me that **AI-generated code isn't inherently bad—it's just a starting point that needs verification and refinement**. The original game code had bugs, but those bugs were fixable, testable, and learnable. Rather than rewriting from scratch, I debugged it methodically, wrote tests to catch edge cases, and documented the process. AI code can be production-ready, but only when paired with rigorous testing and honest assessment of what's actually broken.
+
+---
