@@ -25,28 +25,31 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+- [x] **Game's purpose:** This project is a Streamlit number-guessing game where the player tries to identify a secret number. The game provides high/low hints, tracks attempts, and maintains a score.
 
-## 📸 Demo Walkthrough
+- [x] **Bugs found:** During testing, I found several issues. Easy mode could generate a secret number outside its displayed 1–20 range, blank or invalid guesses could affect attempts and history, and the high/low hint messages were reversed.
 
-Describe your fixed game in numbered steps so a reader can follow along without watching a video:
+- [x] **Fixes applied:** I refactored `check_guess()` from `app.py` into `logic_utils.py` and corrected the high/low hint logic. A guess that is too high now tells the player to go lower, while a guess that is too low tells the player to go higher. I also added pytest verification for the corrected behavior.
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+## 🎮 Demo Walkthrough
 
-**Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
+1. The user starts the Streamlit game and selects a difficulty.
+2. The game displays the allowed number range and available attempts.
+3. The user enters a numerical guess.
+4. If the guess is greater than the secret number, the game returns **"Too High"** and tells the user **"Go LOWER!"**
+5. If the guess is less than the secret number, the game returns **"Too Low"** and tells the user **"Go HIGHER!"**
+6. If the guess matches the secret number, the game returns **"Win"** and displays **"🎉 Correct!"**
+7. The score and game state update based on the result of the guess.
+8. The game ends when the player wins or runs out of attempts.
 
-## 🧪 Test Results
+```text
+$ python -m pytest
+============================= test session starts ==============================
+collected 3 items
 
-```
-# Paste your pytest output here, e.g.:
-# pytest tests/
-# ========================= X passed in 0.XXs =========================
+tests/test_game_logic.py ...                                      [100%]
+
+============================== 3 passed in 0.01s ===============================
 ```
 
 ## 🚀 Stretch Features
